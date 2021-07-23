@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/powerso1/backend_restaurant_management/issues"
   },
-  "homepage": "https://github.com/powerso1/backend_restaurant_management#readme"
+  "homepage": "https://github.com/powerso1/backend_restaurant_management#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
 }
