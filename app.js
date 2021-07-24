@@ -2,6 +2,6 @@ const express = require('express')
 const app = express()
 const port = 3000
 
-app.get('/', (req, res) => res.send("Back end is ruuning bois. %s ",process.env.PORT))
+app.get('/', (req, res) => res.send("Back end is runing bois"))
 
 app.listen(process.env.PORT || port, () => console.log('Example app listening on port %s!',port))
