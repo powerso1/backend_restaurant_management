@@ -1,17 +1,27 @@
-const express = require("express");
+const express = require('express');
 const app = express();
-const mysql = require("mysql");
-require("dotenv").config();
+const mysql = require('mysql');
+require('dotenv').config();
 
 const port = 3000;
 
-app.get("/", (req, res) => res.send("Back end is runing bois"));
-app.get("/user/:username", (req, res) => {
-  console.log("it working");
-  res.send({ username: req.params.username, password: "admin" });
-  console.log("finish");
+// Import routes
+const usersRoute = require('./routes/users');
+
+// middleware
+app.use(express.json());
+
+// Routes
+app.use('/users', usersRoute);
+
+app.get('/', (req, res) => res.send('Back end is runing bois'));
+app.get('/user/:username', (req, res) => {
+  console.log('it working');
+  res.send({ username: req.params.username, password: 'admin' });
+  console.log('finish');
 });
 
+// Database
 let connecttion = mysql.createConnection({
   host: process.env.DB_HOST,
   user: process.env.DB_USERNAME,
@@ -21,7 +31,7 @@ let connecttion = mysql.createConnection({
 
 connecttion.connect(function (err) {
   if (err) throw err;
-  console.log("DB connected!");
+  console.log('DB connected!');
 });
 
 // mysql.connect(
@@ -30,5 +40,5 @@ connecttion.connect(function (err) {
 // );
 
 app.listen(process.env.PORT || port, () =>
-  console.log("Example app listening on port %s!", port)
+  console.log('Example app listening on port %s!', port)
 );
