@@ -4,11 +4,13 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon app.js"
+    "start": "node app.js",
+    "test": "nodemon app.js"
   },
   "engines": {
-    "node": "12.x"
+    "node": "14.x"
   },
+  "type": "module",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/powerso1/backend_restaurant_management.git"
