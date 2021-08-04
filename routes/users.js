@@ -1,5 +1,5 @@
-const express = require('express');
-const userController = require('../controllers/user');
+import express from 'express';
+import * as userController from '../controllers/users.js';
 const router = express.Router();
 
 router.get('/', (req, res) => {
@@ -16,4 +16,4 @@ router.get('/:username', (req, res) => {
   res.send('hello ' + username);
 });
 
-module.exports = router;
+export { router };
