@@ -1,5 +1,8 @@
 # backend_restaurant_management
 
+Member 1: 19127121 - Hoang Minh Duc
+Member 2: 19127340 - Tran Le Quoc Bao
+
 # Backend example code
 
 https://blog.logrocket.com/node-js-express-js-mysql-rest-api-example/
