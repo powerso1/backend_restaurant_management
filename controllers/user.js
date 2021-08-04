@@ -1,4 +1,4 @@
-function getUser() {
+export function getUser() {
   return 'getUser controller';
 }
 function postUser() {}
@@ -9,4 +9,7 @@ function deleteUserByUsername(username) {}
 module.exports = {
   getUser,
   postUser,
+  getUserByUsername,
+  patchUserByUsername,
+  deleteUserByUsername,
 };
