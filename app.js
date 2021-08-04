@@ -25,6 +25,8 @@ mysqlPool.getConnection(function (err) {
   console.log('DB connected!');
 });
 
+console.log(mysqlPool.config.connectionConfig);
+
 // Routes
 app.use('/users', usersRoute);
 
