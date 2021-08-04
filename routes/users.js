@@ -3,11 +3,12 @@ import * as userController from '../controllers/users.js';
 const router = express.Router();
 
 router.get('/', (req, res) => {
-  result = userController.getUser();
+  const result = userController.getUser();
   res.send(result);
 });
 
 router.post('/', (req, res) => {
+  const result = userController.getUser();
   res.send('Welcome');
 });
 

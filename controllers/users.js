@@ -1,4 +1,4 @@
-export function getUser() {
+export function getUser(req, res, next) {
   return 'getUser controller';
 }
 export function postUser() {}

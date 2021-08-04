@@ -29,11 +29,6 @@ mysqlPool.getConnection(function (err) {
 app.use('/users', usersRoute);
 
 app.get('/', (req, res) => res.send('Back end is runing bois'));
-app.get('/user/:username', (req, res) => {
-  console.log('it working');
-  res.send({ username: req.params.username, password: 'admin' });
-  console.log('finish');
-});
 
 // mysql.connect(
 //   "mysql://:@/heroku_bafd04ba4f49282?reconnect=true",
