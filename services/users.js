@@ -1,7 +1,7 @@
 import { mysqlPool as sql } from '../config/db.js';
 
 const User = function (user) {
-  this.Username = user.Username;
+  this.Username = user.Username || null;
   this.Password = user.Password;
   this.EmployeeType = user.EmployeeType;
   this.Name = user.Name;
@@ -10,16 +10,16 @@ const User = function (user) {
   this.PhoneNumber = user.PhoneNumber;
 };
 
-User.getAll = (result) => {
+User.getAll = async function () {
   sql.query('select * from user', (err, rows) => {
     if (err) {
       console.log(err);
-      result(null, err);
       return;
     }
+    console.log('==================');
     console.log(rows);
-    result(null, rows);
+    return rows;
   });
 };
 
-export { User };
+export default User;

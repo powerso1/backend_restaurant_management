@@ -1,8 +1,10 @@
-import { User as userService } from '../services/users.js';
+import User from '../services/users.js';
 
-export function getUser() {
-  return userService.getAll()[1];
+export async function getUser() {
+  const temp = await User.getAll();
+  await console.log('jshdj', temp);
 }
+
 export function postUser() {}
 export function getUserByUsername(username) {}
 export function patchUserByUsername(username) {}

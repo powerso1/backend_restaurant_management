@@ -5,21 +5,7 @@ import { mysqlPool as sql } from '../config/db.js';
 const router = express.Router();
 
 router.get('/', (req, res) => {
-  console.log('haha');
-
-  function foo(result) {
-    sql.query('select * from user', (err, rows) => {
-      if (err) {
-        console.log(err);
-        return;
-      }
-      console.log(rows);
-      result(rows);
-    });
-  }
-  const temp = foo((result) => {
-    console.log(result);
-  });
+  userController.getUser();
 });
 
 router.post('/', (req, res) => {
