@@ -1,11 +1,11 @@
 import User from '../services/users.js';
 
 export async function getUser() {
-  const temp = await User.getAll();
-  await console.log('jshdj', temp);
+  const rows = await User.getAll();
+  return JSON.parse(JSON.stringify(rows));
 }
 
 export function postUser() {}
-export function getUserByUsername(username) {}
+export async function getUserByUsername(username) {}
 export function patchUserByUsername(username) {}
 export function deleteUserByUsername(username) {}

@@ -1,4 +1,4 @@
-import { mysqlPool as sql } from '../config/db.js';
+import { query } from '../config/db.js';
 
 const User = function (user) {
   this.Username = user.Username || null;
@@ -11,15 +11,8 @@ const User = function (user) {
 };
 
 User.getAll = async function () {
-  sql.query('select * from user', (err, rows) => {
-    if (err) {
-      console.log(err);
-      return;
-    }
-    console.log('==================');
-    console.log(rows);
-    return rows;
-  });
+  const rows = await query('select * from user', null);
+  return rows;
 };
 
 export default User;

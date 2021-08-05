@@ -1,11 +1,11 @@
 import express from 'express';
 import * as userController from '../controllers/users.js';
-import { mysqlPool as sql } from '../config/db.js';
 
 const router = express.Router();
 
-router.get('/', (req, res) => {
-  userController.getUser();
+router.get('/', async (req, res) => {
+  const result = await userController.getUser();
+  res.json(result);
 });
 
 router.post('/', (req, res) => {
