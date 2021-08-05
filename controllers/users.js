@@ -1,5 +1,7 @@
-export function getUser(req, res, next) {
-  return 'getUser controller';
+import { User as userService } from '../services/users.js';
+
+export function getUser() {
+  return userService.getAll()[1];
 }
 export function postUser() {}
 export function getUserByUsername(username) {}
