@@ -13,9 +13,9 @@ router.post('/', (req, res) => {
   // res.send('Welcome');
 });
 
-router.get('/:username', (req, res) => {
-  const username = req.params.username;
-  res.send('hello ' + username);
+router.get('/:username', async (req, res) => {
+  const result = await userController.getUserByUsername(req.params.username);
+  res.json(result);
 });
 
 export { router };

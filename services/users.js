@@ -1,4 +1,5 @@
 import { query } from '../config/db.js';
+import mysql from 'mysql';
 
 const User = function (user) {
   this.Username = user.Username || null;
@@ -13,6 +14,14 @@ const User = function (user) {
 User.getAll = async function () {
   const rows = await query('select * from user', null);
   return rows;
+};
+
+User.getUserByUsername = async function (username) {
+  const rows = await query(
+    'select * from user where user.Username = ?',
+    username
+  );
+  return rows[0];
 };
 
 export default User;

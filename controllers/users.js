@@ -6,6 +6,9 @@ export async function getUser() {
 }
 
 export function postUser() {}
-export async function getUserByUsername(username) {}
+export async function getUserByUsername(username) {
+  const rows = await User.getUserByUsername(username);
+  return JSON.parse(JSON.stringify(rows));
+}
 export function patchUserByUsername(username) {}
 export function deleteUserByUsername(username) {}
