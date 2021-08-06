@@ -1,14 +1,27 @@
-import User from '../services/users.js';
+import { User as userService } from '../services/users.js';
 
 export async function getUser() {
-  const rows = await User.getAll();
+  const rows = await userService.getAll();
   return JSON.parse(JSON.stringify(rows));
 }
 
-export function postUser() {}
-export async function getUserByUsername(username) {
-  const rows = await User.getUserByUsername(username);
+export async function postUser(user) {
+  const userObj = new userService(user);
+  // return await userObj.createUser();
+
+  const row = await userObj.createUser();
   return JSON.parse(JSON.stringify(rows));
 }
-export function patchUserByUsername(username) {}
 export function deleteUserByUsername(username) {}
+
+export async function getUserByUsername(username) {
+  const userObj = new userService({ Username: username });
+  const rows = await userObj.getUserByUsername();
+  return JSON.parse(JSON.stringify(rows));
+}
+
+export async function patchUserByUsername(user) {
+  const userObj = new userService(user);
+  const rows = await userObj.updateUser();
+  return JSON.parse(JSON.stringify(rows));
+}
