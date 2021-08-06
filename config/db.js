@@ -7,7 +7,7 @@ const pool = mysql.createPool({
   user: process.env.DB_USERNAME,
   password: process.env.DB_PASSWORD,
   database: process.env.DB_NAME,
-  timezone: '+00:00',
+  dateStrings: true,
 });
 
 export const query = function (sql, values) {
@@ -19,6 +19,7 @@ export const query = function (sql, values) {
       } else {
         connection.query(sql, values, (err, rows) => {
           if (err) {
+            // reject(err);
             reject(err);
           } else {
             resolve(rows);
