@@ -9,7 +9,7 @@ export async function postUser(user) {
   const userObj = new userService(user);
   // return await userObj.createUser();
 
-  const row = await userObj.createUser();
+  const rows = await userObj.createUser();
   return JSON.parse(JSON.stringify(rows));
 }
 export function deleteUserByUsername(username) {}
