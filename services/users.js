@@ -10,13 +10,7 @@ const User = function (user) {
     this.DOB = user.DOB;
     this.Address = user.Address;
     this.PhoneNumber = user.PhoneNumber;
-    this.Username = user.Username;
-    this.Password = user.Password;
-    this.EmployeeType = user.EmployeeType;
-    this.Name = user.Name;
-    this.DOB = user.DOB;
-    this.Address = user.Address;
-    this.PhoneNumber = user.PhoneNumber;
+    this.ImageLink = user.ImageLink;
   }
 };
 
@@ -33,6 +27,14 @@ User.prototype.getUserByUsername = async function () {
   return rows[0];
 };
 
+User.prototype.deleteUserByUsername = async function () {
+  const sql = `
+  DELETE from user
+  where user.Username = ? `;
+  const rows = await query(sql, this.Username);
+  return rows[0];
+};
+
 User.prototype.updateUser = async function () {
   const sql = `
   UPDATE user
@@ -41,7 +43,8 @@ User.prototype.updateUser = async function () {
       Name = ?,
       DOB = ?,
       Address = ?,
-      PhoneNumber = ?
+      PhoneNumber = ?,
+      ImageLink = ?
   WHERE user.Username = ?
   `;
   const values = [
@@ -51,6 +54,7 @@ User.prototype.updateUser = async function () {
     this.DOB,
     this.Address,
     this.PhoneNumber,
+    this.ImageLink,
     this.Username,
   ];
   const rows = await query(sql, values);
@@ -60,7 +64,7 @@ User.prototype.updateUser = async function () {
 User.prototype.createUser = async function () {
   const sql = `
   INSERT INTO user
-  VALUES (?,?,?,?,?,?,?)`;
+  VALUES (?,?,?,?,?,?,?,?)`;
   const values = [
     this.Username,
     this.Password,
@@ -69,6 +73,7 @@ User.prototype.createUser = async function () {
     this.DOB,
     this.Address,
     this.PhoneNumber,
+    this.ImageLink,
   ];
 
   const rows = await query(sql, values);

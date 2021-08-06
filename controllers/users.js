@@ -7,12 +7,14 @@ export async function getUser() {
 
 export async function postUser(user) {
   const userObj = new userService(user);
-  // return await userObj.createUser();
-
   const rows = await userObj.createUser();
   return JSON.parse(JSON.stringify(rows));
 }
-export function deleteUserByUsername(username) {}
+export async function deleteUserByUsername(username) {
+  const userObj = new userService({ Username: username });
+  const rows = await userObj.deleteUserByUsername();
+  return JSON.parse(JSON.stringify(rows));
+}
 
 export async function getUserByUsername(username) {
   const userObj = new userService({ Username: username });
