@@ -22,7 +22,6 @@ export const query = function (sql, values) {
             // reject(err);
             reject(err);
           } else {
-            JSON.parse(JSON.stringify(rows));
             resolve(rows);
           }
           // end the session
