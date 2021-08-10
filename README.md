@@ -28,3 +28,7 @@ https://stackoverflow.com/questions/41875617/building-enterprise-app-with-node-e
 - ## POST multiple record
 
   - https://stackoverflow.com/questions/44706088/python-post-multiple-records-in-one-api-call
+
+- ## MySQL result object
+
+  - https://www.tutorialkart.com/nodejs/nodejs-mysql-result-object/

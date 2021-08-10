@@ -1,5 +1,6 @@
 import express from 'express';
 import morgan from 'morgan';
+import { hashPassword } from './lib/index.js';
 
 const app = express();
 const port = 3000;
