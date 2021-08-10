@@ -15,7 +15,11 @@ const User = function (user) {
 };
 
 User.getAll = async function () {
-  const rows = await query('select * from user', null);
+  const sql = `
+  select Username, EmployeeType, Name, DOB, Address, PhoneNumber, ImageLink
+  from user
+  `;
+  const rows = await query(sql, null);
   return rows;
 };
 
@@ -38,7 +42,7 @@ User.prototype.deleteUserByUsername = async function () {
 User.prototype.updateUser = async function () {
   const sql = `
   UPDATE user
-  SET Password = ?,
+  SET
       EmployeeType = ?,
       Name = ?,
       DOB = ?,
@@ -48,7 +52,6 @@ User.prototype.updateUser = async function () {
   WHERE user.Username = ?
   `;
   const values = [
-    this.Password,
     this.EmployeeType,
     this.Name,
     this.DOB,
