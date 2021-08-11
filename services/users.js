@@ -1,8 +1,7 @@
 import { query } from '../config/db.js';
-import mysql from 'mysql';
-
+import { hashPassword } from '../lib/index.js';
 const User = function (user) {
-  if (user) {
+  if (user !== undefined) {
     this.Username = user.Username;
     this.Password = user.Password;
     this.EmployeeType = user.EmployeeType;
@@ -14,41 +13,52 @@ const User = function (user) {
   }
 };
 
-User.getAll = async function () {
-  const rows = await query('select * from user', null);
+User.getProfile = async function () {
+  const sql = `
+  select Username, EmployeeType, Name, DOB, Address, PhoneNumber, ImageLink, Password
+  from user
+  `;
+  const rows = await query(sql, null);
   return rows;
 };
 
 User.prototype.getUserByUsername = async function () {
   const sql = `
   select * from user
-  where user.Username = ? `;
-  const rows = await query(sql, this.Username);
+  where user.Username = ?`;
+  const rows = await query(sql, [this.Username]);
+
+  if (rows.length === 0) {
+    const error = new Error();
+    error.message = `Cannot find user has username: ${this.Username}`;
+    error.status = 404;
+    throw error;
+  }
+
   return rows[0];
 };
 
 User.prototype.deleteUserByUsername = async function () {
   const sql = `
   DELETE from user
-  where user.Username = ? `;
-  const rows = await query(sql, this.Username);
-  return rows[0];
+  where user.Username = ?`;
+  const rows = await query(sql, [this.Username]);
+  return rows;
 };
 
-User.prototype.updateUser = async function () {
+User.prototype.updateUserProfile = async function () {
   const sql = `
   UPDATE user
-  SET Password = ?,
-      EmployeeType = ?,
-      Name = ?,
-      DOB = ?,
-      Address = ?,
-      PhoneNumber = ?,
-      ImageLink = ?
+  SET
+    EmployeeType = ?,
+    Name = ?,
+    DOB = ?,
+    Address = ?,
+    PhoneNumber = ?,
+    ImageLink = ?
   WHERE user.Username = ?
   `;
   const values = [
-    this.Password,
     this.EmployeeType,
     this.Name,
     this.DOB,

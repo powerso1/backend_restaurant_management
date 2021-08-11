@@ -1,5 +1,6 @@
 import express from 'express';
 import morgan from 'morgan';
+import { hashPassword } from './lib/index.js';
 
 const app = express();
 const port = 3000;
@@ -16,7 +17,7 @@ app.use((req, res, next) => {
   res.header('Access-Control-Allow-Origin', '*');
   res.header(
     'Access-Control-Allow-Headers',
-    'Origin, X-Requested-With, Content-Type, Accept, Authorization'
+    'Origin, X-Requested-With, Content-Type, Accept, Authorization, auth-token'
   );
   if (req.method === 'OPTIONS') {
     res.header('Access-Control-Allow-Methods', 'GET, PATCH, POST, PUT, DELETE');
@@ -27,16 +28,17 @@ app.use((req, res, next) => {
 
 app.get('/', (req, res) => res.send('Back end is runing bois'));
 
-// Routes
+// Routes middleware
 app.use('/users', usersRoute);
 
-// Error
+// Error 404 middleware
 app.use((req, res, next) => {
   const error = new Error('Not found');
   error.status = 404;
   next(error);
 });
 
+// send error middleware
 app.use((error, req, res, next) => {
   res.status(error.status || 500);
   res.json({
