@@ -28,8 +28,6 @@ User.prototype.getUserByUsername = async function () {
   where user.Username = ?`;
   const rows = await query(sql, [this.Username]);
 
-  console.log(rows);
-
   if (rows.length === 0) {
     const error = new Error();
     error.message = `Cannot find user has username: ${this.Username}`;

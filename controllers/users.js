@@ -1,6 +1,7 @@
 import { User as userService } from '../services/users.js';
 import { hashPassword } from '../lib/index.js';
 import bcrypt from 'bcryptjs';
+import jwt from 'jsonwebtoken';
 
 export async function getUser() {
   const userObj = new userService();
@@ -44,5 +45,14 @@ export async function login(user) {
     throw error;
   }
 
-  return validPass;
+  // create token
+  const token = jwt.sign(
+    {
+      Username: result.Username,
+      EmployeeType: result.EmployeeType,
+    },
+    process.env.SECRET_TOKEN
+  );
+
+  return { token: token, EmployeeType: result.EmployeeType };
 }

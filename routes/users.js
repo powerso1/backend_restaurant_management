@@ -53,10 +53,10 @@ router.delete('/:username', async (req, res, next) => {
 router.post('/login', async (req, res, next) => {
   try {
     const result = await userController.login(req.body);
-    console.log(req.body);
-    res.json(result);
+    res
+      .header({ 'auth-token': result.token })
+      .json({ data: { EmployeeType: result.EmployeeType } });
   } catch (error) {
-    console.log(error);
     next(error);
   }
 });
