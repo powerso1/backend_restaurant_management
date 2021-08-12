@@ -1,6 +1,7 @@
 import express from 'express';
 import morgan from 'morgan';
 import { hashPassword } from './lib/index.js';
+import { auth } from './verifyToken.js';
 
 const app = express();
 const port = 3000;
@@ -29,6 +30,8 @@ app.use((req, res, next) => {
 app.get('/', (req, res) => res.send('Back end is runing bois'));
 
 // Routes middleware
+app.all('*', auth);
+
 app.use('/users', usersRoute);
 
 // Error 404 middleware
