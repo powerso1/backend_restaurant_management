@@ -16,7 +16,7 @@ FoodAndDrink.getAll = async function () {
   return rows;
 };
 
-User.prototype.deleteFoodByIdFood = async function () {
+FoodAndDrink.prototype.deleteFoodByIdFood = async function () {
   const sql = `
   DELETE from food_and_drink
   where food_and_drink.IdFood = ? `;
@@ -24,7 +24,7 @@ User.prototype.deleteFoodByIdFood = async function () {
   return rows[0];
 };
 
-User.prototype.updateFood = async function () {
+FoodAndDrink.prototype.updateFood = async function () {
   const sql = `
   UPDATE food_and_drink
   SET FoodName = ?,
@@ -44,7 +44,7 @@ User.prototype.updateFood = async function () {
   return rows;
 };
 
-User.prototype.createFood = async function () {
+FoodAndDrink.prototype.createFood = async function () {
   const sql = `
   INSERT INTO food_and_drink
   VALUES (?,?,?,?,?)`;
