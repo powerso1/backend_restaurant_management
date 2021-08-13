@@ -30,6 +30,7 @@ app.get('/', (req, res) => res.send('Back end is runing bois'));
 
 // Routes
 app.use('/users', usersRoute);
+app.use('/foods', foodsRoute);
 
 // Error
 app.use((req, res, next) => {
