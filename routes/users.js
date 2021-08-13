@@ -31,7 +31,10 @@ router.get('/:username', async (req, res, next) => {
 
 router.patch('/:username', async (req, res, next) => {
   try {
-    const result = await userController.patchUserByUsername(req.body);
+    const result = await userController.patchUserByUsername(
+      req.params.username,
+      req.body
+    );
     res.json(result);
   } catch (error) {
     next(error);
