@@ -1,5 +1,6 @@
 import { query } from '../config/db.js';
 import mysql from 'mysql';
+import createBinaryUUID, { fromBinaryUUID } from "binary-uuid";
 
 const FoodAndDrink = function (food) {
   if (food) {
@@ -12,7 +13,7 @@ const FoodAndDrink = function (food) {
 };
 
 FoodAndDrink.getAll = async function () {
-  const rows = await query('select * from food_and_drink', null);
+  const rows = await query('select IdFood from food_and_drink', null);
   return rows;
 };
 
