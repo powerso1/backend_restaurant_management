@@ -16,7 +16,7 @@ export async function deleteFoodByIdFood(idfood) {
   return rows;
 }
 
-export async function patchFoodByIdFood(food) {
+export async function patchFoodByIdFood(idfood, food) {
   const foodObj = new foodService(food);
   const rows = await foodObj.updateFood();
   return rows;

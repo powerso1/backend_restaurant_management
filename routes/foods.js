@@ -21,20 +21,21 @@ router.post('/', async (req, res, next) => {
   }
 });
 
-router.patch('/:id-food', async (req, res, next) => {
+router.patch('/:idfood', async (req, res, next) => {
   try {
-    const result = await foodController.patchFoodByIdFood(req.body);
+    const result = await foodController.patchFoodByIdFood(
+      req.params.idfood,
+      req.body
+    );
     res.json(result);
   } catch (error) {
     next(error);
   }
 });
 
-router.delete('/:id-food', async (req, res, next) => {
+router.delete('/:idfood', async (req, res, next) => {
   try {
-    const result = await foodController.deleteFoodByIdFood(
-      req.params.id-food
-    );
+    const result = await foodController.deleteFoodByIdFood(req.params.idfood);
     res.json(result);
   } catch (error) {
     next(error);

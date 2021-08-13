@@ -1,6 +1,6 @@
 import { query } from '../config/db.js';
 import mysql from 'mysql';
-import createBinaryUUID, { fromBinaryUUID } from "binary-uuid";
+import { v4 as uuidv4 } from 'uuid';
 
 const FoodAndDrink = function (food) {
   if (food) {
@@ -13,7 +13,8 @@ const FoodAndDrink = function (food) {
 };
 
 FoodAndDrink.getAll = async function () {
-  const rows = await query('select IdFood from food_and_drink', null);
+  const rows = await query('select * from food_and_drink', null);
+
   return rows;
 };
 
@@ -32,14 +33,14 @@ FoodAndDrink.prototype.updateFood = async function () {
       Price = ?,
       Description = ?,
       ImageLink = ?
-  WHERE food_and_drink.IdFood = ?
+  WHERE IdFood = ?
   `;
   const values = [
-    this.IdFood,
     this.FoodName,
     this.Price,
     this.Description,
     this.ImageLink,
+    this.IdFood,
   ];
   const rows = await query(sql, values);
   return rows;
@@ -49,6 +50,7 @@ FoodAndDrink.prototype.createFood = async function () {
   const sql = `
   INSERT INTO food_and_drink
   VALUES (?,?,?,?,?)`;
+  this.IdFood = uuidv4();
   const values = [
     this.IdFood,
     this.FoodName,
