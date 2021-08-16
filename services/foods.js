@@ -63,4 +63,12 @@ FoodAndDrink.prototype.createFood = async function () {
   return rows;
 };
 
+FoodAndDrink.prototype.getFoodByIdFood = async function () {
+  const sql = `
+  select * from food_and_drink
+  where food_and_drink.IdFood = ? `;
+  const rows = await query(sql, this.IdFood);
+  return rows[0];
+};
+
 export { FoodAndDrink };
