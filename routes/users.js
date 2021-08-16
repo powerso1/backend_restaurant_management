@@ -1,6 +1,5 @@
 import express from 'express';
 import * as userController from '../controllers/users.js';
-import mysql from 'mysql';
 const router = express.Router();
 
 router.get('/', async (req, res, next) => {
@@ -32,7 +31,10 @@ router.get('/:username', async (req, res, next) => {
 
 router.patch('/:username', async (req, res, next) => {
   try {
-    const result = await userController.patchUserByUsername(req.body);
+    const result = await userController.patchUserByUsername(
+      req.params.username,
+      req.body
+    );
     res.json(result);
   } catch (error) {
     next(error);
@@ -54,7 +56,7 @@ router.post('/login', async (req, res, next) => {
   try {
     const result = await userController.login(req.body);
     res
-      .header({ 'auth-token': result.token })
+      .header({ 'Auth-Token': result.token })
       .json({ data: { EmployeeType: result.EmployeeType } });
   } catch (error) {
     next(error);

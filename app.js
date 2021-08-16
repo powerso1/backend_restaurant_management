@@ -1,12 +1,14 @@
 import express from 'express';
 import morgan from 'morgan';
 import { hashPassword } from './lib/index.js';
+import { auth } from './verifyToken.js';
 
 const app = express();
 const port = 3000;
 
 // Import routes
 import { router as usersRoute } from './routes/users.js';
+import { router as foodsRoute } from './routes/foods.js';
 
 // ----Middleware----
 app.use(morgan('dev'));
@@ -29,7 +31,10 @@ app.use((req, res, next) => {
 app.get('/', (req, res) => res.send('Back end is runing bois'));
 
 // Routes middleware
+app.all('*', auth);
+
 app.use('/users', usersRoute);
+app.use('/foods', foodsRoute);
 
 // Error 404 middleware
 app.use((req, res, next) => {
