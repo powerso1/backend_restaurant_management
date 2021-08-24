@@ -5,7 +5,7 @@ const router = express.Router();
 router.get('/', async (req, res, next) => {
   try {
     const result = await userController.getUser();
-    res.json(result);
+    res.json({ data: result });
   } catch (error) {
     next(error);
   }
@@ -14,7 +14,7 @@ router.get('/', async (req, res, next) => {
 router.post('/', async (req, res, next) => {
   try {
     const result = await userController.postUser(req.body);
-    res.json(result);
+    res.json({ data: result });
   } catch (error) {
     next(error);
   }
@@ -23,7 +23,7 @@ router.post('/', async (req, res, next) => {
 router.get('/:username', async (req, res, next) => {
   try {
     const result = await userController.getUserByUsername(req.params.username);
-    res.json(result);
+    res.json({ data: result });
   } catch (error) {
     next(error);
   }
@@ -35,7 +35,7 @@ router.patch('/:username', async (req, res, next) => {
       req.params.username,
       req.body
     );
-    res.json(result);
+    res.json({ data: result });
   } catch (error) {
     next(error);
   }
@@ -46,7 +46,7 @@ router.delete('/:username', async (req, res, next) => {
     const result = await userController.deleteUserByUsername(
       req.params.username
     );
-    res.json(result);
+    res.json({ data: result });
   } catch (error) {
     next(error);
   }
