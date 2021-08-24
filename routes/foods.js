@@ -6,7 +6,7 @@ const router = express.Router();
 router.get('/', async (req, res, next) => {
   try {
     const result = await foodController.getFood();
-    res.json(result);
+    res.json({ data: result });
   } catch (error) {
     next(error);
   }
@@ -15,7 +15,7 @@ router.get('/', async (req, res, next) => {
 router.post('/', async (req, res, next) => {
   try {
     const result = await foodController.postFood(req.body);
-    res.json(result);
+    res.json({ data: result });
   } catch (error) {
     next(error);
   }
@@ -27,7 +27,7 @@ router.patch('/:idfood', async (req, res, next) => {
       req.params.idfood,
       req.body
     );
-    res.json(result);
+    res.json({ data: result });
   } catch (error) {
     next(error);
   }
@@ -36,7 +36,7 @@ router.patch('/:idfood', async (req, res, next) => {
 router.delete('/:idfood', async (req, res, next) => {
   try {
     const result = await foodController.deleteFoodByIdFood(req.params.idfood);
-    res.json(result);
+    res.json({ data: result });
   } catch (error) {
     next(error);
   }
