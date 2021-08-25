@@ -41,6 +41,27 @@ export async function patchUserByUsername(username, user) {
   return result;
 }
 
+export async function changePassword(username, body) {
+  const curUser = await getUserByUsername(username);
+  const curPassword = curUser.Password;
+  const validPass = await bcrypt.compare(body.OldPassword, curPassword);
+
+  if (!validPass) {
+    const error = new Error();
+    error.status = 400;
+    error.message = 'Your old password is incorrect';
+    throw error;
+  }
+
+  const newPassword = await hashPassword(body.NewPassword);
+  const userObj = new userService({
+    Username: body.Username,
+    Password: newPassword,
+  });
+  await userObj.updateUserPassword();
+  return { message: 'Password change successfully' };
+}
+
 export async function login(user) {
   const userObj = new userService(user);
   const result = await userObj.getUserByUsername();

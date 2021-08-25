@@ -23,6 +23,7 @@ router.post('/', async (req, res, next) => {
 router.get('/:username', async (req, res, next) => {
   try {
     const result = await userController.getUserByUsername(req.params.username);
+    delete result.Password;
     res.json({ data: result });
   } catch (error) {
     next(error);
@@ -45,6 +46,18 @@ router.delete('/:username', async (req, res, next) => {
   try {
     const result = await userController.deleteUserByUsername(
       req.params.username
+    );
+    res.json({ data: result });
+  } catch (error) {
+    next(error);
+  }
+});
+
+router.patch('/:username/change-password', async (req, res, next) => {
+  try {
+    const result = await userController.changePassword(
+      req.params.username,
+      req.body
     );
     res.json({ data: result });
   } catch (error) {
