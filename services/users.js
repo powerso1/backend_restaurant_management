@@ -71,6 +71,18 @@ User.prototype.updateUserProfile = async function () {
   return rows;
 };
 
+User.prototype.updateUserPassword = async function () {
+  const sql = `
+  UPDATE user
+  SET
+    Password = ?
+  WHERE user.Username = ?
+  `;
+  const values = [this.Password, this.Username];
+  const rows = await query(sql, values);
+  return rows;
+};
+
 User.prototype.createUser = async function () {
   const sql = `
   INSERT INTO user
