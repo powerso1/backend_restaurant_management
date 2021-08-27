@@ -9,6 +9,7 @@ const port = 3000;
 // Import routes
 import { router as usersRoute } from './routes/users.js';
 import { router as foodsRoute } from './routes/foods.js';
+import { router as orderItemsRoute } from './routes/order-items.js';
 
 // ----Middleware----
 app.use(morgan('dev'));
@@ -35,6 +36,7 @@ app.all('*', auth);
 
 app.use('/users', usersRoute);
 app.use('/foods', foodsRoute);
+app.use('/order-items', orderItemsRoute);
 
 // Error 404 middleware
 app.use((req, res, next) => {
