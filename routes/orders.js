@@ -5,7 +5,15 @@ const router = express.Router();
 router.get('/', async (req, res, next) => {
   try {
     const result = await orderController.getOrder();
-    res.json({ data: result });
+    var test = {}
+    test.list = new Array();
+
+    for (var i = 0; i < result.length; i++)
+    {
+      test.list.push(result[i].IdOrder);
+    }
+    test.list = test.list.toString();
+    res.json({ data: test });
   } catch (error) {
     next(error);
   }
@@ -14,7 +22,7 @@ router.get('/', async (req, res, next) => {
 router.post('/', async (req, res, next) => {
   try {
     const result = await orderController.postOrder(req.body);
-    res.json({ data: { list: result.IdOrder } });
+    res.json({ data: result });
   } catch (error) {
     next(error);
   }

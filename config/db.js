@@ -8,6 +8,7 @@ const pool = mysql.createPool({
   password: process.env.DB_PASSWORD,
   database: process.env.DB_NAME,
   dateStrings: true,
+  multipleStatements: true,
 });
 
 export const query = function (sql, values) {

@@ -1,4 +1,5 @@
 import { query } from '../config/db.js';
+import mysql from 'mysql';
 
 const Order = function (order) {
   if (order !== undefined) {
@@ -69,15 +70,21 @@ const Order = function (order) {
 // };
 
 Order.getAllOrders = async function () {
-    const rows = await query('select IdOrder from order', null);
+    const sql = `
+    SELECT IdOrder
+    FROM .order`;
+    const rows = await query(sql, null);
   
     return rows;
   };
 
 Order.prototype.createOrder = async function () {
   const sql = `
-  INSERT INTO order
+  SET @@auto_increment_increment=1;
+  INSERT INTO .order
   VALUES (?,?,?,?,?)`;
+  this.Status = 0;
+  this.TotalPrice = 0;
   const values = [
     this.IdOrder,
     this.Table,
@@ -87,7 +94,7 @@ Order.prototype.createOrder = async function () {
   ];
 
   const rows = await query(sql, values);
-  return rows;
+  return rows[1];
 };
 
 export { Order };

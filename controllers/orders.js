@@ -8,7 +8,7 @@ export async function getOrder() {
 export async function postOrder(order) {
   const orderObj = new orderService(order);
   const rows = await orderObj.createOrder();
-  return rows;
+  return rows.insertId;
 }
 
 // export async function deleteFoodByIdFood(idfood) {
