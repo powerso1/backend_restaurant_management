@@ -3,7 +3,7 @@ import { query } from '../config/db.js';
 const OrderItems = function (orderItems) {
   if (orderItems) {
     this.IdOrder = orderItems.IdOrder;
-    this.list = orderItems.list;
+    this.OrderItems = orderItems.OrderItems;
   }
 };
 
@@ -21,8 +21,12 @@ OrderItems.prototype.createOrderItems = async function () {
   VALUES ?
   `;
   let values = [];
-  for (let i = 0; i < this.list.length; i++) {
-    values.push([this.IdOrder, this.list[i].IdFood, this.list[i].Number]);
+  for (let i = 0; i < this.OrderItems.length; i++) {
+    values.push([
+      this.IdOrder,
+      this.OrderItems[i].IdFood,
+      this.OrderItems[i].Number,
+    ]);
   }
 
   const rows = await query(sql, [values]);
