@@ -15,9 +15,13 @@ router.get('/:idorder', async (req, res, next) => {
 
 router.put('/:idorder', async (req, res, next) => {
   try {
-    await orderItemController.deleteOrderItemByIdOrder(req.params.idorder);
-    await orderItemController.postOrderItem(req.body);
-    res.json({ data: { message: 'Edit order success' } });
+    const deleteAll = await orderItemController.deleteOrderItemByIdOrder(
+      req.params.idorder
+    );
+    const addAll = await orderItemController.postOrderItem(req.body);
+    console.log(deleteAll, addAll);
+    const result = { deleteAll: deleteAll, addAll: addAll };
+    res.json({ data: result, message: 'Edit order success' });
   } catch (error) {
     next(error);
   }

@@ -35,9 +35,9 @@ OrderItems.prototype.createOrderItems = async function () {
 
 OrderItems.prototype.getOrderItemByIdOrder = async function () {
   const sql = `
-  select * from order_item
+  select *
+  from order_item left join food_and_drink on order_item.IdFood = food_and_drink.IdFood
   where order_item.IdOrder = ? `;
-
   const rows = await query(sql, [this.IdOrder]);
   return rows;
 };
