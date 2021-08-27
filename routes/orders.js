@@ -22,7 +22,8 @@ router.get('/', async (req, res, next) => {
 router.post('/', async (req, res, next) => {
   try {
     const result = await orderController.postOrder(req.body);
-    res.json({ data: result });
+    var IdOrder = { IdOrder : result };
+    res.json({ data: IdOrder });
   } catch (error) {
     next(error);
   }
