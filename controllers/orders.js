@@ -11,15 +11,15 @@ export async function postOrder(order) {
   return rows.insertId;
 }
 
+export async function getOrderByIdOrder(idorder) {
+  const orderObj = new orderService({ IdOrder: idorder });
+  const rows = await orderObj.getOrderByIdOrder();
+  return rows;
+}
+
 // export async function deleteFoodByIdFood(idfood) {
 //   const foodObj = new foodService({ IdFood: idfood });
 //   const rows = await foodObj.deleteFoodByIdFood();
-//   return rows;
-// }
-
-// export async function getFoodByIdFood(idfood) {
-//   const foodObj = new foodService({ IdFood: idfood });
-//   const rows = await foodObj.getFoodByIdFood();
 //   return rows;
 // }
 

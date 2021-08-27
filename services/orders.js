@@ -20,21 +20,21 @@ const Order = function (order) {
 //   return rows;
 // };
 
-// User.prototype.getUserByUsername = async function () {
-//   const sql = `
-//   select * from user
-//   where user.Username = ?`;
-//   const rows = await query(sql, [this.Username]);
+Order.prototype.getOrderByIdOrder = async function () {
+  const sql = `
+  select * from .order
+  where IdOrder = ?`;
+  const rows = await query(sql, [this.IdOrder]);
 
-//   if (rows.length === 0) {
-//     const error = new Error();
-//     error.message = `Cannot find user has username: ${this.Username}`;
-//     error.status = 404;
-//     throw error;
-//   }
+  if (rows.length === 0) {
+    const error = new Error();
+    error.message = `Cannot find order has IdOrder: ${this.IdOrder}`;
+    error.status = 404;
+    throw error;
+  }
 
-//   return rows[0];
-// };
+  return rows[0];
+};
 
 // User.prototype.deleteUserByUsername = async function () {
 //   const sql = `
@@ -70,13 +70,13 @@ const Order = function (order) {
 // };
 
 Order.getAllOrders = async function () {
-    const sql = `
+  const sql = `
     SELECT IdOrder
     FROM .order`;
-    const rows = await query(sql, null);
-  
-    return rows;
-  };
+  const rows = await query(sql, null);
+
+  return rows;
+};
 
 Order.prototype.createOrder = async function () {
   const sql = `
