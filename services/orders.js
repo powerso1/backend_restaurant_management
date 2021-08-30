@@ -44,30 +44,27 @@ Order.prototype.getOrderByIdOrder = async function () {
 //   return rows;
 // };
 
-// User.prototype.updateUserProfile = async function () {
-//   const sql = `
-//   UPDATE user
-//   SET
-//     EmployeeType = ?,
-//     Name = ?,
-//     DOB = ?,
-//     Address = ?,
-//     PhoneNumber = ?,
-//     ImageLink = ?
-//   WHERE user.Username = ?
-//   `;
-//   const values = [
-//     this.EmployeeType,
-//     this.Name,
-//     this.DOB,
-//     this.Address,
-//     this.PhoneNumber,
-//     this.ImageLink,
-//     this.Username,
-//   ];
-//   const rows = await query(sql, values);
-//   return rows;
-// };
+Order.prototype.updateOrder = async function () {
+  const sql = `
+  UPDATE .order AS o
+  SET
+    Coupon = ?,
+    TotalPrice = ?,
+    Status = ?, 
+    o.Table = ?
+  WHERE IdOrder = ?
+  `;
+  
+  const values = [
+    this.Coupon,
+    this.TotalPrice,
+    this.Status,
+    this.Table,
+    this.IdOrder,
+  ];
+  const rows = await query(sql, values);
+  return rows;
+};
 
 Order.getAllOrders = async function () {
   const sql = `
@@ -92,7 +89,6 @@ Order.prototype.createOrder = async function () {
     this.TotalPrice,
     this.Status,
   ];
-
   const rows = await query(sql, values);
   return rows[1];
 };
