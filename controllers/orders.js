@@ -23,16 +23,15 @@ export async function getOrderByIdOrder(idorder) {
 //   return rows;
 // }
 
-// export async function patchFoodByIdFood(idfood, food) {
-//   const curFood = await getFoodByIdFood(idfood);
+export async function patchOrderByIdOrder(idorder, order) {
+  const curOrder = await getOrderByIdOrder(idorder);
+  const keys = Object.keys(order);
+  for (let i = 0; i < keys.length; i++) {
+    const k = keys[i];
+    curOrder[k] = order[k];
+  }
 
-//   const keys = Object.keys(food);
-//   for (let i = 0; i < keys.length; i++) {
-//     const k = keys[i];
-//     curFood[k] = food[k];
-//   }
-
-//   const foodObj = new foodService(curFood);
-//   const result = await foodObj.updateFood();
-//   return result;
-// }
+  const orderObj = new orderService(curOrder);
+  const result = await orderObj.updateOrder();
+  return result;
+}
