@@ -82,6 +82,7 @@ Order.prototype.createOrder = async function () {
   VALUES (?,?,?,?,?)`;
   this.Status = 0;
   this.TotalPrice = 0;
+  this.Coupon = 'no sale';
   const values = [
     this.IdOrder,
     this.Table,
