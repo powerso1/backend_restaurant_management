@@ -50,6 +50,18 @@ router.get('/:idorder', async (req, res, next) => {
   }
 });
 
+router.patch('/:idorder', async (req, res, next) => {
+  try {
+    const result = await orderController.patchOrderByIdOrder(
+      req.params.idorder,
+      req.body
+    );
+    res.json({ data: result });
+  } catch (error) {
+    next(error);
+  }
+});
+
 // router.delete('/:idfood', async (req, res, next) => {
 //   try {
 //     const result = await orderController.deleteFoodByIdFood(req.params.idfood);
