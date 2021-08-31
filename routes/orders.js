@@ -21,6 +21,10 @@ router.get('/', async (req, res, next) => {
 
 router.post('/', async (req, res, next) => {
   try {
+    if (req.body.OrderItems.length === 0) {
+      throw new Error('Order is empty');
+    }
+
     // create order
     const curIdOrder = await orderController.postOrder(req.body);
 
@@ -64,8 +68,13 @@ router.patch('/:idorder', async (req, res, next) => {
 
 router.delete('/:idorder', async (req, res, next) => {
   try {
-    const result = await orderController.deleteOrderByIdOrder(req.params.idorder);
-    res.json({ data: result });
+    const result = await orderController.deleteOrderByIdOrder(
+      req.params.idorder
+    );
+    res.json({
+      data: result,
+      message: `Delete successfully order with idorder: ${req.params.idorder}`,
+    });
   } catch (error) {
     next(error);
   }

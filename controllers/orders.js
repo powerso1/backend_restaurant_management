@@ -20,10 +20,10 @@ export async function getOrderByIdOrder(idorder) {
 
 export async function deleteOrderByIdOrder(idorder) {
   const orderObj = new orderService({ IdOrder: idorder });
-  const orderitemObj = new orderItemService( {IdOrder: idorder});
-  const delItem = await orderitemObj.deleteOrderItemByIdOrder();
-  const rows = await orderObj.deleteOrderByIdOrder();
-  return rows;
+  const orderitemObj = new orderItemService({ IdOrder: idorder });
+  const delItems = await orderitemObj.deleteOrderItemByIdOrder();
+  const delOrders = await orderObj.deleteOrderByIdOrder();
+  return { delItems, delOrders };
 }
 
 export async function patchOrderByIdOrder(idorder, order) {
