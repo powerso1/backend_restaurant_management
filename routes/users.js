@@ -59,7 +59,7 @@ router.patch('/:username/change-password', async (req, res, next) => {
       req.params.username,
       req.body
     );
-    res.json({ data: result });
+    res.json({ data: result, message: 'Password change successfully' });
   } catch (error) {
     next(error);
   }

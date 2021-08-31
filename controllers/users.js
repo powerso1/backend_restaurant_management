@@ -58,8 +58,8 @@ export async function changePassword(username, body) {
     Username: body.Username,
     Password: newPassword,
   });
-  await userObj.updateUserPassword();
-  return { message: 'Password change successfully' };
+  const result = await userObj.updateUserPassword();
+  return result;
 }
 
 export async function login(user) {
