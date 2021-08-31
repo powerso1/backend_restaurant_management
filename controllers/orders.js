@@ -6,10 +6,19 @@ export async function getOrder() {
   return rows;
 }
 
-export async function postOrder(order) {
-  const orderObj = new orderService(order);
-  const rows = await orderObj.createOrder();
-  return rows.insertId;
+export async function postOrder(body) {
+  const orderObj = new orderService(body);
+  const addOrder = await orderObj.createOrder();
+
+  const idorder = addOrder.insertId;
+
+  const orderItemObj = new orderItemService({
+    IdOrder: idorder,
+    OrderItems: body.OrderItems,
+  });
+  const addItems = await orderItemObj.createOrderItems();
+
+  return { idorder, addOrder, addItems };
 }
 
 export async function getOrderByIdOrder(idorder) {

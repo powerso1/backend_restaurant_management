@@ -19,7 +19,6 @@ router.put('/:idorder', async (req, res, next) => {
       req.params.idorder
     );
     const addAll = await orderItemController.postOrderItem(req.body);
-    console.log(deleteAll, addAll);
     const result = { deleteAll: deleteAll, addAll: addAll };
     res.json({ data: result, message: 'Edit order success' });
   } catch (error) {

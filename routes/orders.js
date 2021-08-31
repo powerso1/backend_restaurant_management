@@ -26,16 +26,9 @@ router.post('/', async (req, res, next) => {
     }
 
     // create order
-    const curIdOrder = await orderController.postOrder(req.body);
+    const result = await orderController.postOrder(req.body);
 
-    // create order-item
-    await orderItemController.postOrderItem({
-      IdOrder: curIdOrder,
-      OrderItems: req.body.OrderItems,
-    });
-
-    var IdOrder = { IdOrder: curIdOrder };
-    res.json({ data: IdOrder });
+    res.json({ data: result });
   } catch (error) {
     next(error);
   }
