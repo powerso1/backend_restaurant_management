@@ -31,6 +31,7 @@ app.use((req, res, next) => {
 });
 
 app.get('/', (req, res) => res.send('Back end is runing bois'));
+app.get('/temp', (req, res) => res.json({ Price: 12.25 }));
 
 // Routes middleware
 app.all('*', auth);
