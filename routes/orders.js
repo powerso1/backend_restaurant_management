@@ -62,13 +62,13 @@ router.patch('/:idorder', async (req, res, next) => {
   }
 });
 
-// router.delete('/:idfood', async (req, res, next) => {
-//   try {
-//     const result = await orderController.deleteFoodByIdFood(req.params.idfood);
-//     res.json({ data: result });
-//   } catch (error) {
-//     next(error);
-//   }
-// });
+router.delete('/:idorder', async (req, res, next) => {
+  try {
+    const result = await orderController.deleteOrderByIdOrder(req.params.idorder);
+    res.json({ data: result });
+  } catch (error) {
+    next(error);
+  }
+});
 
 export { router };

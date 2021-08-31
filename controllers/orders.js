@@ -1,4 +1,5 @@
 import { Order as orderService } from '../services/orders.js';
+import { OrderItems as orderItemService } from '../services/order-items.js';
 
 export async function getOrder() {
   const rows = await orderService.getAllOrders();
@@ -17,11 +18,13 @@ export async function getOrderByIdOrder(idorder) {
   return rows;
 }
 
-// export async function deleteFoodByIdFood(idfood) {
-//   const foodObj = new foodService({ IdFood: idfood });
-//   const rows = await foodObj.deleteFoodByIdFood();
-//   return rows;
-// }
+export async function deleteOrderByIdOrder(idorder) {
+  const orderObj = new orderService({ IdOrder: idorder });
+  const orderitemObj = new orderItemService( {IdOrder: idorder});
+  const delItem = await orderitemObj.deleteOrderItemByIdOrder();
+  const rows = await orderObj.deleteOrderByIdOrder();
+  return rows;
+}
 
 export async function patchOrderByIdOrder(idorder, order) {
   const curOrder = await getOrderByIdOrder(idorder);

@@ -11,15 +11,6 @@ const Order = function (order) {
   }
 };
 
-// User.getProfile = async function () {
-//   const sql = `
-//   select Username, EmployeeType, Name, DOB, Address, PhoneNumber, ImageLink, Password
-//   from user
-//   `;
-//   const rows = await query(sql, null);
-//   return rows;
-// };
-
 Order.prototype.getOrderByIdOrder = async function () {
   const sql = `
   select * from .order
@@ -36,13 +27,13 @@ Order.prototype.getOrderByIdOrder = async function () {
   return rows[0];
 };
 
-// User.prototype.deleteUserByUsername = async function () {
-//   const sql = `
-//   DELETE from user
-//   where user.Username = ?`;
-//   const rows = await query(sql, [this.Username]);
-//   return rows;
-// };
+Order.prototype.deleteOrderByIdOrder = async function () {
+  const sql = `
+  DELETE from .order
+  where IdOrder = ?`;
+  const rows = await query(sql, [this.IdOrder]);
+  return rows;
+};
 
 Order.prototype.updateOrder = async function () {
   const sql = `
