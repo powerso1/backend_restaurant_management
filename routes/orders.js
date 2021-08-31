@@ -43,8 +43,8 @@ router.get('/:idorder', async (req, res, next) => {
     const order_items = await orderItemController.getOrderItemByIdOrder(
       req.params.idorder
     );
-    const result = { order, order_items };
-    res.json({ data: result });
+    order['order_items'] = order_items;
+    res.json({ data: order });
   } catch (error) {
     next(error);
   }
