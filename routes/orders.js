@@ -73,4 +73,18 @@ router.delete('/:idorder', async (req, res, next) => {
   }
 });
 
+router.patch('/calcprice/:idorder', async (req, res, next) => {
+  try {
+    console.log(req.params.idorder);
+    const price = await orderController.calcPrice(req.params.idorder);
+    const result = await orderController.patchOrderByIdOrder(
+      req.params.idorder,
+      {"TotalPrice": price}
+    );
+    res.json({ data: result });
+  } catch (error) {
+    next(error);
+  }
+});
+
 export { router };

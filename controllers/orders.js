@@ -47,3 +47,9 @@ export async function patchOrderByIdOrder(idorder, order) {
   const result = await orderObj.updateOrder();
   return result;
 }
+
+export async function calcPrice(idorder) {
+  const orderObj = new orderService({ IdOrder: idorder});
+  const rows = await orderObj.calcPrice();
+  return rows.Price;
+}

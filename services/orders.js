@@ -82,7 +82,17 @@ Order.prototype.createOrder = async function () {
     this.Status,
   ];
   const rows = await query(sql, values);
+  console.log(rows[1]);
   return rows[1];
+};
+
+Order.prototype.calcPrice = async function () {
+  const sql = `
+  SELECT ROUND(SUM(FAD.Price * OI.Number),2) AS Price
+  FROM .Order AS O, Order_Item AS OI, food_and_drink AS FAD
+  WHERE O.IdOrder = OI.IdOrder AND FAD.IdFood = OI.IdFood AND O.IdOrder = ?`;
+  const rows = await query(sql, [this.IdOrder]);
+  return rows[0];
 };
 
 export { Order };
