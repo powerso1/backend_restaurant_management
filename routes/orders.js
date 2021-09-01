@@ -5,6 +5,7 @@ const router = express.Router();
 
 router.get('/', async (req, res, next) => {
   try {
+
     const result = await orderController.getOrder();
     var test = {};
     test.list = new Array();
@@ -36,6 +37,11 @@ router.post('/', async (req, res, next) => {
 
 router.get('/:idorder', async (req, res, next) => {
   try {
+    const price = await orderController.calcPrice(req.params.idorder);
+    const result = await orderController.patchOrderByIdOrder(
+      req.params.idorder,
+      {"TotalPrice": price}
+    );
     const order = await orderController.getOrderByIdOrder(req.params.idorder);
     const order_items = await orderItemController.getOrderItemByIdOrder(
       req.params.idorder
@@ -73,18 +79,18 @@ router.delete('/:idorder', async (req, res, next) => {
   }
 });
 
-router.patch('/calcprice/:idorder', async (req, res, next) => {
-  try {
-    console.log(req.params.idorder);
-    const price = await orderController.calcPrice(req.params.idorder);
-    const result = await orderController.patchOrderByIdOrder(
-      req.params.idorder,
-      {"TotalPrice": price}
-    );
-    res.json({ data: result });
-  } catch (error) {
-    next(error);
-  }
-});
+// router.patch('/calcprice/:idorder', async (req, res, next) => {
+//   try {
+//     console.log(req.params.idorder);
+//     const price = await orderController.calcPrice(req.params.idorder);
+//     const result = await orderController.patchOrderByIdOrder(
+//       req.params.idorder,
+//       {"TotalPrice": price}
+//     );
+//     res.json({ data: result });
+//   } catch (error) {
+//     next(error);
+//   }
+// });
 
 export { router };
