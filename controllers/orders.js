@@ -53,3 +53,15 @@ export async function calcPrice(idorder) {
   const rows = await orderObj.calcPrice();
   return rows.Price;
 }
+
+export async function calcPriceWithCoupon(idorder, idcoupon) {
+
+  const orderObj = new orderService({ 
+      IdOrder: idorder,
+      Coupon: idcoupon,
+    });
+  // console.log(orderObj);
+
+  const rows = await orderObj.calcPriceWithCoupon();
+  return rows.Price;
+}

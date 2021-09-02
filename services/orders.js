@@ -95,4 +95,18 @@ Order.prototype.calcPrice = async function () {
   return rows[0];
 };
 
+Order.prototype.calcPriceWithCoupon = async function () {
+  const sql = `
+  SELECT ROUND((O.TotalPrice * C.DisCount), 2) Price
+  FROM .ORDER AS O, COUPON AS C
+  WHERE C.IDCOUPON = ? AND O.IDORDER = ?
+  `;
+  const values = [
+      this.Coupon,
+      this.IdOrder,
+  ];
+  const rows = await query(sql, values);
+  return rows[0];
+};
+
 export { Order };
