@@ -59,8 +59,9 @@ Order.prototype.updateOrder = async function () {
 
 Order.getAllOrders = async function () {
   const sql = `
-    SELECT IdOrder
-    FROM .order`;
+    SELECT O.IdOrder
+    FROM .order O
+    WHERE O.STATUS = 0`;
   const rows = await query(sql, null);
 
   return rows;
