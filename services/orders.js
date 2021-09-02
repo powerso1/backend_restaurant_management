@@ -14,7 +14,7 @@ const Order = function (order) {
 Order.prototype.getOrderByIdOrder = async function () {
   const sql = `
   select * from .order
-  where IdOrder = ?`;
+  where IdOrder = ? and Status = 0`;
   const rows = await query(sql, [this.IdOrder]);
 
   if (rows.length === 0) {
