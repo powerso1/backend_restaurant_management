@@ -11,6 +11,7 @@ import { router as usersRoute } from './routes/users.js';
 import { router as foodsRoute } from './routes/foods.js';
 import { router as orderItemsRoute } from './routes/order-items.js';
 import { router as ordersRoute } from './routes/orders.js';
+import { router as couponsRoute } from './routes/coupons.js';
 
 // ----Middleware----
 app.use(morgan('dev'));
@@ -40,6 +41,7 @@ app.use('/users', usersRoute);
 app.use('/foods', foodsRoute);
 app.use('/order-items', orderItemsRoute);
 app.use('/orders', ordersRoute);
+app.use('/coupons', couponsRoute);
 
 // Error 404 middleware
 app.use((req, res, next) => {
