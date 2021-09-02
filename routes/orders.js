@@ -3,9 +3,9 @@ import * as orderController from '../controllers/orders.js';
 import * as orderItemController from '../controllers/order-items.js';
 const router = express.Router();
 
-router.get('/calcprice', async (req, res, next) => {
+router.get('/:idorder/calcprice', async (req, res, next) => {
   try {
-    const price = await orderController.calcPriceWithCoupon(req.body.IdOrder, req.body.IdCoupon);
+    const price = await orderController.calcPriceWithCoupon(req.params.idorder, req.body.IdCoupon);
     res.json({ data: { Price: price } });
   } catch (error) {
     next(error);
