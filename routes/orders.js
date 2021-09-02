@@ -3,8 +3,18 @@ import * as orderController from '../controllers/orders.js';
 import * as orderItemController from '../controllers/order-items.js';
 const router = express.Router();
 
+router.get('/calcprice', async (req, res, next) => {
+  try {
+    const price = await orderController.calcPriceWithCoupon(req.body.IdOrder, req.body.IdCoupon);
+    res.json({ data: { Price: price } });
+  } catch (error) {
+    next(error);
+  }
+});
+
 router.get('/', async (req, res, next) => {
   try {
+
     const result = await orderController.getOrder();
     var test = {};
     test.list = new Array();
@@ -36,6 +46,11 @@ router.post('/', async (req, res, next) => {
 
 router.get('/:idorder', async (req, res, next) => {
   try {
+    const price = await orderController.calcPrice(req.params.idorder);
+    const result = await orderController.patchOrderByIdOrder(
+      req.params.idorder,
+      {"TotalPrice": price}
+    );
     const order = await orderController.getOrderByIdOrder(req.params.idorder);
     const order_items = await orderItemController.getOrderItemByIdOrder(
       req.params.idorder
@@ -72,5 +87,6 @@ router.delete('/:idorder', async (req, res, next) => {
     next(error);
   }
 });
+
 
 export { router };
